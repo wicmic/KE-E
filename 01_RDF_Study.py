@@ -78,7 +78,7 @@ def generate_graph(data):
 
 data = fetch_data_from_wikidata()
 data_to_df = pd.DataFrame(data)
-data_df = data_to_df.head(1)
+data_df = data_to_df.head(1)      #Kürzen nur auf eine Fachhochschule für übersichtliche Darstellung
 graph = generate_graph(data_df)
 
 
