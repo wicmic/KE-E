@@ -1,5 +1,5 @@
 import scrapy
-
+import pandas as pd
 
 class MasterstudiengangSpider(scrapy.Spider):
     name = "masterstudiengang"
@@ -7,21 +7,21 @@ class MasterstudiengangSpider(scrapy.Spider):
     start_urls = ["https://www.fhnw.ch/de/studium/master"]
 
     def parse(self, response):
-        rows = response.xpath('/div')
+        Master_of = response.css('span.widg_teaser__dateline::text').getall()
+        Studiengang = response.xpath('//h3/text()').getall()
+        Link = response.css('a.widg_teaser__link::attr(href)').getall()
 
-        for row in rows:
-            #Master_of = row.css('span.widg_teaser__dateline::text').getall()
-            Studiengang = row.xpath('.//h3/text()').get()
-            # Element 1:     /html/body/div[1]/div[2]/div[2]/div[1]/div[3]/div/div/div/div/div[2]/h3
-            # Element 2:    /html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div/div/div/div[2]/div[2]/h3
 
-            #Link = response.css('a.widg_teaser__link::attr(href)').getall()
 
-            yield {
-                #'Master of':Master_of,
-                'Studiengang':Studiengang,
-                #'Link':Link
-            }
+        # Daten als csv speichern
+        data = [{'Master of': m, 'Studiengang': s, 'Link': l} for m, s, l in zip(Master_of, Studiengang, Link)]
+        df = pd.DataFrame(data)
+        df.to_csv('masterstudiengang_data2.csv')
 
-# 1. Terminal cd "aktuelle Spider" (wo diese py-Datei liegt)
-# 2. scrapy crawl masterstudiengang -o masterstudiengang_1.csv
+
+# Vorgehen starten im Terminal:
+# 1. cd "D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE"
+# 2. d:
+# 3. scrapy crawl masterstudiengang
+
+
