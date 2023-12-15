@@ -5,10 +5,14 @@ import csv
 class Masterstudiengang_DetailsSpider(scrapy.Spider):
     name = "masterstudiengang_details"
     allowed_domains = ["www.fhnw.ch"]
-    start_urls = ["https://www.fhnw.ch/de/studium/psychologie/master-angewandte-psychologie",
-                  "https://www.fhnw.ch/de/studium/architektur-bau-geomatik/master-studiengang-architektur",
-                  "https: // www.fhnw.ch / de / studium / architektur - bau - geomatik / master - of - science - fhnw - in -engineering - mse", # keine Einträge vorhanden
-                  "https://www.fhnw.ch/de/studium/gestaltung-kunst/master-of-arts/master-of-arts-fhnw-in-design-digital-communication-environments"] # 4 Beispiele
+
+    df = pd.read_csv('D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE\masterstudiengang_base.csv') # Link anpassen
+    start_urls = df['Link'].tolist() # Daten aus df als Liste speichern
+
+    #start_urls = ['https://www.fhnw.ch/de/studium/psychologie/master-angewandte-psychologie',
+                  #'https://www.fhnw.ch/de/studium/architektur-bau-geomatik/master-studiengang-architektur',
+                  #'https: // www.fhnw.ch / de / studium / architektur - bau - geomatik / master - of - science - fhnw - in -engineering - mse', # keine Einträge vorhanden
+                  #'https://www.fhnw.ch/de/studium/gestaltung-kunst/master-of-arts/master-of-arts-fhnw-in-design-digital-communication-environments'] # 4 Beispiele
 
     def parse(self, response):
         Abschluss_official = response.xpath('//dt[text()="Abschluss"]/following-sibling::dd[1]/text()').get(default="keine Angaben vorhanden")
