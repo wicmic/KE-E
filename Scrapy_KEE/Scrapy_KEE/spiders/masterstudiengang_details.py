@@ -5,7 +5,10 @@ import csv
 class Masterstudiengang_DetailsSpider(scrapy.Spider):
     name = "masterstudiengang_details"
     allowed_domains = ["www.fhnw.ch"]
-    start_urls = ["https://www.fhnw.ch/de/studium/psychologie/master-angewandte-psychologie"]
+    start_urls = ["https://www.fhnw.ch/de/studium/psychologie/master-angewandte-psychologie",
+                  "https://www.fhnw.ch/de/studium/architektur-bau-geomatik/master-studiengang-architektur",
+                  "https: // www.fhnw.ch / de / studium / architektur - bau - geomatik / master - of - science - fhnw - in -engineering - mse", # keine Einträge vorhanden
+                  "https://www.fhnw.ch/de/studium/gestaltung-kunst/master-of-arts/master-of-arts-fhnw-in-design-digital-communication-environments"] # 4 Beispiele
 
     def parse(self, response):
         Abschluss_official = response.xpath('//dt[text()="Abschluss"]/following-sibling::dd[1]/text()').get(default="keine Angaben vorhanden")
@@ -19,7 +22,7 @@ class Masterstudiengang_DetailsSpider(scrapy.Spider):
         data = {'Abschluss_official': [Abschluss_official], 'Start': [Start], 'Modus': [Modus], 'Dauer': [Dauer],
                 'Semestergebühr': [Semestergebühr]}
         df = pd.DataFrame(data)
-        df.to_csv('masterstudiengang_details.csv')
+        df.to_csv('masterstudiengang_details.csv', mode='a', header=False)
 
 
 
