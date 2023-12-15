@@ -18,6 +18,7 @@ class MasterstudiengangSpider(scrapy.Spider):
         df.to_csv('masterstudiengang_base.csv')
 
 
+
 # Vorgehen starten im Terminal:
 # 1. cd "D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE"
 # 2. d:
