@@ -91,8 +91,6 @@ def generate_graph(df):
     return g
 
 data1 = pickeln_data_from_wikidata()
-#data_to_df = pd.DataFrame(data)
-#data_df = data_to_df.head(1)
 graph = generate_graph(data1.head(1))
 
 
