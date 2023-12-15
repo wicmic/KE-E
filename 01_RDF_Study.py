@@ -13,20 +13,20 @@ def fetch_data_from_wikidata():
           SERVICE <https://query.wikidata.org/sparql> {
             ?school wdt:P31 wd:Q15850083;     	# is a university of applied science
                     rdfs:label ?label_school;       	 
-                    wdt:P625 ?coordinates;
+                    wdt:P625 ?location_coordinates;
                     wdt:P131 ?location;
                     wdt:P856 ?website.
-            ?located rdfs:label ?label_location.
+            ?location rdfs:label ?label_location.
 
 
 
             OPTIONAL {?school wdt:P1813 ?shortname;   	 
                             wdt:P1366 ?school_replace.  	 
                     ?school_replace rdfs:label ?label_replace.}
-            OPTIONAL {?located wdt:P625 ?location_coordinates.}
+            OPTIONAL {?location wdt:P625 ?location_coordinates.}
 
             FILTER (LANG(?label_school) = "en" &&      	# Englisch sind mehr verfügbar als in Deutsch
-                    LANG(?label_located) = "en")
+                    LANG(?label_location) = "en")
             }
           }
         ORDER BY ASC (?label_school)
@@ -78,7 +78,7 @@ def generate_graph(data):
 
 data = fetch_data_from_wikidata()
 data_to_df = pd.DataFrame(data)
-data_df = data_to_df.head(1)
+data_df = data_to_df.head(1)      #Kürzen nur auf eine Fachhochschule für übersichtliche Darstellung
 graph = generate_graph(data_df)
 
 
@@ -97,10 +97,13 @@ def convert_rdflib_graph_to_networkx(graph):
     return G
 
 def visualize_graph(G):
+    plt.figure(figsize=(15, 10))
     pos = nx.spring_layout(G)  # Layout für den Graphen
     edge_labels = nx.get_edge_attributes(G, 'label')
+    # Kürzen der Beschriftungen auf 20 Zeichen
+    edge_labels = {k: v[:20] for k, v in edge_labels.items()}
 
-    nx.draw(G, pos, with_labels=True, node_size=500, node_color='lightblue', linewidths=0.45, font_size=10)
+    nx.draw(G, pos, with_labels=True, node_size=4000, node_color='lightblue', linewidths=0.5, font_size=14)
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='red')
 
     plt.show()
