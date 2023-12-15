@@ -23,6 +23,14 @@ class MasterstudiengangSpider(scrapy.Spider):
 # 2. d:
 # 3. scrapy crawl masterstudiengang
 
-# 2. Caller csv als Input nehmen
+
+# Check im Terminal:
+# 1. cd "D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE"
+# 2. d:
+# 3. scrapy shell
+# 4. r = scrapy.Request(url='https://www.fhnw.ch/de/studium/master')        (Link ändern)
+# 5. fetch(r)
+# 6. response.body
+# 7. response.xpath('//h3/text()').getall()     (hier in Klammer anpassen, je nach xpath vom Element)
 
 
