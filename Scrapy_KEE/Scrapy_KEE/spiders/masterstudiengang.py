@@ -12,16 +12,17 @@ class MasterstudiengangSpider(scrapy.Spider):
         Link = response.css('a.widg_teaser__link::attr(href)').getall()
 
 
-
         # Daten als csv speichern
         data = [{'Master of': m, 'Studiengang': s, 'Link': l} for m, s, l in zip(Master_of, Studiengang, Link)]
         df = pd.DataFrame(data)
-        df.to_csv('masterstudiengang_data2.csv')
+        df.to_csv('masterstudiengang_base.csv')
 
 
 # Vorgehen starten im Terminal:
 # 1. cd "D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE"
 # 2. d:
 # 3. scrapy crawl masterstudiengang
+
+# 2. Caller csv als Input nehmen
 
 
