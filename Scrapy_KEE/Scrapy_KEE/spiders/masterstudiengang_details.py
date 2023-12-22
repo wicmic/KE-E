@@ -24,7 +24,7 @@ class Masterstudiengang_DetailsSpider(scrapy.Spider):
 
     def closed(self, reason):
         # DataFrame mit den ergänzten Daten speichern
-        self.df.to_csv('masterstudiengang_details.csv', index=False)
+        self.df.to_csv('masterstudiengang_details_fhnw.csv', index=False)
 
 
 

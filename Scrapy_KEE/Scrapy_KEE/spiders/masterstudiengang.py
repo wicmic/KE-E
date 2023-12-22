@@ -15,7 +15,7 @@ class MasterstudiengangSpider(scrapy.Spider):
         # Daten als csv speichern
         data = [{'Master of': m, 'Studiengang': s, 'Link': l} for m, s, l in zip(Master_of, Studiengang, Link)]
         df = pd.DataFrame(data)
-        df.to_csv('masterstudiengang_base.csv')
+        df.to_csv('masterstudiengang_base_fhnw.csv')
 
 
 
@@ -33,5 +33,4 @@ class MasterstudiengangSpider(scrapy.Spider):
 # 5. fetch(r)
 # 6. response.body
 # 7. response.xpath('//h3/text()').getall()     (hier in Klammer anpassen, je nach xpath vom Element)
-
 
