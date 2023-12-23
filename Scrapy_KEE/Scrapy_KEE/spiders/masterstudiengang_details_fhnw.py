@@ -31,4 +31,4 @@ class Masterstudiengang_Details_FHNWSpider(scrapy.Spider):
 # Vorgehen starten im Terminal:
 # 1. cd "D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE"
 # 2. d:
-# 3. scrapy crawl masterstudiengang_details
+# 3. scrapy crawl masterstudiengang_details_fhnw
