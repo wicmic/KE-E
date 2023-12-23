@@ -1,11 +1,11 @@
 import scrapy
 import pandas as pd
 
-class Masterstudiengang_DetailsSpider(scrapy.Spider):
-    name = "masterstudiengang_details"
+class Masterstudiengang_Details_FHNWSpider(scrapy.Spider):
+    name = "masterstudiengang_details_fhnw"
     allowed_domains = ["www.fhnw.ch"]
 
-    df = pd.read_csv('D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE\masterstudiengang_base.csv') # Link anpassen
+    df = pd.read_csv('D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE\masterstudiengang_base_fhnw.csv') # Link anpassen
     start_urls = df['Link'].tolist() # Daten aus df als Liste speichern
 
     def parse(self, response):

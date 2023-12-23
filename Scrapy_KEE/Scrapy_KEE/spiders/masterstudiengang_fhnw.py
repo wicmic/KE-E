@@ -1,8 +1,8 @@
 import scrapy
 import pandas as pd
 
-class MasterstudiengangSpider(scrapy.Spider):
-    name = "masterstudiengang"
+class Masterstudiengang_FHNWSpider(scrapy.Spider):
+    name = "masterstudiengang_fhnw"
     allowed_domains = ["www.fhnw.ch"]
     start_urls = ["https://www.fhnw.ch/de/studium/master"]
 
@@ -22,7 +22,7 @@ class MasterstudiengangSpider(scrapy.Spider):
 # Vorgehen starten im Terminal:
 # 1. cd "D:\Python\KE-E\Scrapy_KEE\Scrapy_KEE"
 # 2. d:
-# 3. scrapy crawl masterstudiengang
+# 3. scrapy crawl masterstudiengang_fhnw
 
 
 # Check im Terminal:
