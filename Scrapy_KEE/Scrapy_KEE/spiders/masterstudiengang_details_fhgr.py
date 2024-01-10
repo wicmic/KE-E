@@ -14,7 +14,7 @@ class Masterstudiengang_DetailsFHGRSpider(scrapy.Spider):
         Start = response.xpath('//div//li[contains(.,"Studienbeginn")]/text()').get(default="keine Angaben vorhanden").strip()
         Modus = response.xpath('//div//li[contains(.,"Studienmodell")]/text()').get(default="keine Angaben vorhanden").strip()
         Dauer = response.xpath('//div//li[contains(.,"Studiendauer")]/text()').get(default="keine Angaben vorhanden").strip()
-        Semestergebühr = ' '.join(map(str.strip, response.xpath('//p[contains(.,"Die Studiengebühr beträgt")]/text() | //p[contains(.,"Die Studiengebühr beträgt")]/following-sibling::p[1]//text()').getall())).strip()
+        Semestergebühr = ' '.join(map(str.strip, response.xpath('//p[contains(., "Die Studiengebühr beträgt")]/text() | //p[contains(., "Die Studiengebühr beträgt")]/strong/text() | //p[contains(.,"Die beträgt")]/strong/text() | //p[contains(.,"Die beträgt")]/text()').getall())).strip()
         if not Semestergebühr:
             Semestergebühr = "keine Angaben vorhanden"
 
